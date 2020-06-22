@@ -15,7 +15,7 @@ var app = express();
 
 app.use(helmet({
   hidePoweredBy: { setTo: 'PHP 4.2.0' },
-  contentSecurityPolicy: { directives: { defaultSrc: ["'self'"], styleSrc: ["'self'"], scriptSrc: ["'self'", 'https://code.jquery.com/'] }},
+  contentSecurityPolicy: { directives: { defaultSrc: ["'self'", 'https://hyperdev.com/', 'http://glitch.com/'], styleSrc: ["'self'", "'unsafe-inline'"], scriptSrc: ["'self'", "'unsafe-inline'", 'https://code.jquery.com/'] }},
   frameguard: {action: 'sameorigin'},
   dnsPrefetchControl: {allow: false},
   referrerPolicy: {policy: 'same-origin'}
