@@ -13,6 +13,13 @@ var runner            = require('./test-runner');
 
 var app = express();
 
+app.use(helmet({
+  hidePoweredBy: { setTo: 'PHP 4.2.0' },
+  contentSecurityPolicy: { directives: { defaultSrc: ["'self'"], styleSrc: ["'self'"], scriptSrc: ["'self'"] }},
+  frameguard: {action: 'sameorigin'}
+}));
+
+
 app.use('/public', express.static(process.cwd() + '/public'));
 
 app.use(cors({origin: '*'})); //For FCC testing purposes only
@@ -41,16 +48,6 @@ fccTestingRoutes(app);
 
 //Routing for API 
 apiRoutes(app);
-
-//Sample Front-end
-
-    
-//404 Not Found Middleware
-app.use(function(req, res, next) {
-  res.status(404)
-    .type('text')
-    .send('Not Found');
-});
 
 //Start our server and tests!
 app.listen(process.env.PORT || 3000, function () {
